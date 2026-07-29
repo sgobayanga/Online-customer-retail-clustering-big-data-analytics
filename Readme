@@ -1,0 +1,158 @@
+Online Retail Customer Segmentation and Purchase Behaviour Analysis
+A Python and PyCharm project for analysing the UCI Online Retail transaction dataset, assessing sales and customer behaviour, engineering customer-level features, and creating actionable customer segments using PCA and K-Means clustering.
+Project purpose
+The project addresses this business question:
+> How can historical retail transactions be analysed to identify meaningful customer groups, understand purchasing patterns, and improve targeted marketing campaigns?
+The workflow examines sales trends, products, countries, order values, purchasing frequency, and transaction quantities. It then groups customers into commercially useful segments that can support loyalty, cross-selling, second-purchase, and reactivation campaigns.
+Main analytical objectives
+Assess customer purchasing behaviour using recency, frequency, monetary value, basket value, and product variety.
+Evaluate sales performance over time and identify leading products and geographic markets.
+Build customer segments using unsupervised machine learning.
+Translate the segments into practical marketing actions.
+Dataset
+The project uses the Online Retail dataset from the UCI Machine Learning Repository.
+The raw Excel dataset is deliberately not included in this repository. Download `Online Retail.xlsx` from UCI and place it in:
+```text
+data/Online Retail.xlsx
+```
+Dataset source: https://archive.ics.uci.edu/dataset/352/online+retail
+Key results from the original analysis
+541,909 transaction lines
+25,900 unique invoices
+19,960 valid completed orders
+4,338 identifiable customers used for segmentation
+£10,642,110.80 completed-sales revenue
+Four actionable customer segments
+Silhouette score: 0.371
+Davies-Bouldin Index: 0.916
+Calinski-Harabasz score: 4,350.70
+PCA variance retained: 86.02%
+The most commercially important finding was that approximately 20.65% of customers generated 67.61% of identifiable-customer revenue.
+Customer segments
+Champions / Loyal High-Value — recent, frequent, high-spending customers with broad product diversity.
+Regular / Promising — moderately active customers with potential for cross-selling and frequency growth.
+Recent Occasional / Low-Value — recent buyers with limited purchasing history who may respond to second-purchase incentives.
+At-Risk / Lapsed — customers with long periods since their last purchase and low recent contribution.
+Analysis workflow
+Load the large Excel workbook using a memory-efficient XLSX streaming reader.
+Inspect missing values, exact duplicates, cancellations, quantities, and prices.
+Remove exact duplicates and separate invoices beginning with `C` as cancellations.
+Exclude non-positive quantities and prices from completed-sales analysis.
+Retain missing-CustomerID rows for general sales analysis but exclude them from customer modelling.
+Calculate revenue as `Quantity × UnitPrice`.
+Create sales and purchasing-behaviour visualisations.
+Engineer Recency, Frequency, Monetary Value, and Product Diversity features.
+Cap extreme customer features at the 99th percentile and apply `log1p` transformation.
+Standardise features, apply PCA, compare K-Means solutions, and evaluate the final segmentation model.
+Export charts, CSV files, an Excel workbook, and the trained model bundle.
+Example visualisations
+Monthly sales trend
+![Monthly sales trend](docs/images/monthly_sales_trend.png)
+Revenue by country
+![Revenue by country](docs/images/revenue_by_country.png)
+Customer segments in PCA space
+![Customer segments in PCA space](docs/images/customer_segments_pca.png)
+Project structure
+```text
+online-retail-customer-segmentation/
+│
+├── main.py                         # Runs the complete analysis
+├── config.py                       # Paths and project settings
+├── retail_pipeline.py              # Reusable analysis functions
+├── requirements.txt                # Python dependencies
+├── run_analysis.bat                # Windows convenience launcher
+├── README.md
+├── GITHUB_UPLOAD_GUIDE.md
+├── .gitignore
+├── .gitattributes
+│
+├── data/
+│   └── PLACE_DATASET_HERE.txt      # Put Online Retail.xlsx here locally
+│
+├── docs/
+│   ├── Online_Retail_Analysis_Report.docx
+│   └── images/
+│       ├── monthly_sales_trend.png
+│       ├── revenue_by_country.png
+│       └── customer_segments_pca.png
+│
+└── outputs/
+    ├── charts/
+    └── models/
+```
+Installation
+1. Clone or download the project
+```bash
+git clone https://github.com/YOUR_USERNAME/online-retail-customer-segmentation.git
+cd online-retail-customer-segmentation
+```
+2. Create a virtual environment
+Windows:
+```bash
+python -m venv .venv
+.venv\Scripts\activate
+```
+macOS or Linux:
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+3. Install packages
+```bash
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
+4. Add the dataset
+Copy `Online Retail.xlsx` into the `data` folder.
+5. Run the project
+```bash
+python main.py
+```
+You may also provide the dataset from another location:
+```bash
+python main.py --data "C:\path\to\Online Retail.xlsx"
+```
+Running in PyCharm
+Open the project folder in PyCharm.
+Create or select a Python virtual environment.
+Open the PyCharm terminal and run:
+```bash
+   python -m pip install -r requirements.txt
+   ```
+Put `Online Retail.xlsx` in `data/`.
+Open `main.py` and click Run.
+Outputs
+After execution, the `outputs/` folder will contain:
+`online_retail_analysis_results.xlsx`
+`customer_segments.csv`
+`cluster_profiles.csv`
+`customer_features.csv`
+`cluster_number_evaluation.csv`
+`final_model_evaluation.csv`
+`analysis_summary.txt`
+`analysis.log`
+charts in `outputs/charts/`
+the model bundle in `outputs/models/`
+Generated outputs are ignored by Git because they can be recreated by running the analysis.
+Documentation
+The full six-page visual report is available at:
+```text
+docs/Online_Retail_Analysis_Report.docx
+```
+Important data and privacy note
+Do not commit customer datasets, credentials, access tokens, `.env` files, or generated files containing confidential information. The provided `.gitignore` excludes the raw Excel dataset, PyCharm settings, virtual environments, generated outputs, and model files.
+Limitations
+A substantial number of transaction lines do not contain CustomerID values.
+The dataset covers slightly more than one year.
+Revenue is heavily concentrated in the United Kingdom.
+The dataset does not include customer demographics, campaign response, marketing channels, or profit margins.
+The cluster quality is moderate, so business effectiveness should be validated through campaign experiments and regular model refreshes.
+Future improvements
+Add customer lifetime value and churn-risk modelling.
+Compare K-Means with hierarchical clustering, Gaussian mixture models, and DBSCAN.
+Build a Streamlit dashboard for interactive segment exploration.
+Connect the segment assignments to a CRM or campaign-management platform.
+Track segment movement and campaign performance over time.
+Author
+Samuel Gobayanga
+Academic project in Big Data Analytics, Customer Segmentation, and Purchase Behaviour Analysis.
