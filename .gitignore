@@ -1,0 +1,51 @@
+# PyCharm and virtual environments
+.idea/
+.venv/
+venv/
+env/
+
+# Python cache and tooling
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Raw datasets: keep data locally, not in GitHub
+data/*
+!data/PLACE_DATASET_HERE.txt
+
+# Generated analysis outputs
+outputs/*
+!outputs/charts/
+!outputs/models/
+outputs/charts/*
+outputs/models/*
+!outputs/charts/.gitkeep
+!outputs/models/.gitkeep
+
+# Generated model and log files
+*.joblib
+*.log
+
+# Operating-system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Packaging and editor backups
+build/
+dist/
+*.egg-info/
+*.bak
+*.tmp
+~$*
