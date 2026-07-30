@@ -153,6 +153,4 @@ Compare K-Means with hierarchical clustering, Gaussian mixture models, and DBSCA
 Build a Streamlit dashboard for interactive segment exploration.
 Connect the segment assignments to a CRM or campaign-management platform.
 Track segment movement and campaign performance over time.
-Author
-Samuel Gobayanga
-Academic project in Big Data Analytics, Customer Segmentation, and Purchase Behaviour Analysis.
+
